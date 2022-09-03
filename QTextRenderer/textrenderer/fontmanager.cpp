@@ -69,4 +69,32 @@ FontManager::FontManager(const std::string &font_dir,
             }
         }
     }
+
+    load_font_support_chars();
+}
+
+void FontManager::load_font_support_chars()
+{
+    /**/
+}
+
+void FontManager::load_ttfont(std::string &font_path, stbtt_fontinfo &font_info)
+{
+    FILE *font_file = fopen(font_path.c_str(), "rb");
+    if (font_file == nullptr) {
+        BOOST_LOG_TRIVIAL(error) << fmt::format("Can not open font file: {}", font_path);
+    }
+    fseek(font_file, 0, SEEK_END);
+    auto size = ftell(font_file);
+    fseek(font_file, 0, SEEK_SET);
+
+    auto *font_buffer = (unsigned char *) calloc(size, sizeof(unsigned char));
+    fread(font_buffer, size, 1, font_file);
+    fclose(font_file);
+
+    if (!stbtt_InitFont(&font_info, font_buffer, 0)) {
+        BOOST_LOG_TRIVIAL(error) << fmt::format("stb init font failed");
+    }
+
+    free(font_buffer);
 }

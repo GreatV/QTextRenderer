@@ -28,6 +28,8 @@ set(PROJECT_SOURCES
         textrenderer/bgmanager.cpp
         textrenderer/fontmanager.h
         textrenderer/fontmanager.cpp
+        textrenderer/stb_truetype.h
+        textrenderer/stb_image_write.h
         textrenderer/utils/utils.h
         textrenderer/utils/utils.cpp
         ${TS_FILES}

@@ -6,6 +6,9 @@
 #include <string>
 #include <vector>
 
+#define STB_TRUETYPE_IMPLEMENTATION
+#include "stb_truetype.h"
+
 class FontManager
 {
 public:
@@ -23,6 +26,7 @@ private:
 
 private:
     void load_font_support_chars();
+    void load_ttfont(std::string &font_path, stbtt_fontinfo &font_info);
 };
 
 #endif // FONTMANAGER_H
